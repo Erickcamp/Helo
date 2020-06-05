@@ -10,7 +10,7 @@ const Nav = (props) => {
   return (
     <nav>
       <button onClick={() => push("/dashboard")}>Home</button>
-      <button onClick={() => push("/newpost")}>New Post</button>
+      <button onClick={() => push("/new")}>New Post</button>
       <button onClick={() => push("/")}>Logout</button>
     </nav>
   );

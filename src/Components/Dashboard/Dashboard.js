@@ -3,7 +3,11 @@ import React, {Component} from 'react'
 export default class Dashboard extends Component {
     constructor(){
         super()
-        this.class = {}
+        this.class = {
+            posts: [],
+            search: '',
+            userposts: true
+        }
     }
 
     render(){

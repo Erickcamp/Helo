@@ -15,7 +15,7 @@ app.use(session({
     secret: SESSION_SECRET
 }))
 
-// endpoints here
+
 
 massive({
     connectionString: CONNECTION_STRING,

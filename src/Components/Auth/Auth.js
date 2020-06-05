@@ -3,13 +3,17 @@ import React, {Component} from 'react'
 export default class Auth extends Component {
     constructor(){
         super()
-        this.class = {}
+        this.class = {
+            username: '',
+            password: ''
+        }
     }
 
     render(){
         return(
             <div>
-                This Component is Auth
+                <input placeholder='Username' />
+                <input placeholder='Password' />
             </div>
         )
     }
