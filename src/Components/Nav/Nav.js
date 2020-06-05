@@ -1,16 +1,18 @@
-import React, {Component} from 'react'
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-export default class Nav extends Component {
-    constructor(){
-        super()
-        this.class = {}
-    }
-
-    render(){
-        return(
-            <div>
-                This Component is Nav
-            </div>
-        )
-    }
-}
+const Nav = (props) => {
+  const { push } = props.history;
+  if (props.location.pathname === "/") {
+    return null;
+  }
+  return (
+    <nav>
+      <button onClick={() => push("/dashboard")}>Home</button>
+      <button onClick={() => push("/newpost")}>New Post</button>
+      <button onClick={() => push("/")}>Logout</button>
+    </nav>
+  );
+};
+export default withRouter(Nav);
