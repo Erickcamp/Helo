@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const initialState = {
-    user: {username: '', profile: '', userId: ''},
+    user: {username: '', profile: '', userId: 0},
     isLoggedIn: false
 }
 

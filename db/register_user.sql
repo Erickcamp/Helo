@@ -1,5 +1,6 @@
   
 INSERT INTO users
-(username, hash, img)
+(username, password)
 VALUES
-($1, $2, $3)
+($1, $2)
+returning id, username;

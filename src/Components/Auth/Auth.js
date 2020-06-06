@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser } from "../../ducks/reducer";
 
-export default class Auth extends Component {
+class Auth extends Component {
   constructor() {
     super();
     this.state = {
@@ -20,7 +20,6 @@ export default class Auth extends Component {
   };
 
   login = (e) => {
-    const { push } = this.props.history;
     e.preventDefault();
     const { username, password } = this.state;
     axios
@@ -44,8 +43,8 @@ export default class Auth extends Component {
           this.props.history.push('/dashboard')
       })
       .catch(err => {
-          console.log(err.response.data)
-          alert(err.response.data)
+          console.log(err)
+          alert(err)
       })
   }
 
@@ -70,10 +69,13 @@ export default class Auth extends Component {
             value={password}
             onChange={(e) => this.changeHandler(e)}
           />
-          <button onClick={this.login}>Login</button>
-          <button onClick={this.register}>Register</button>
+          <button onClick={(e) => this.login(e)}>Login</button>
+          <button onClick={(e) => this.register(e)}>Register</button>
         </form>
       </div>
     );
   }
 }
+
+const mapStateToProps = reduxState => reduxState
+export default connect(mapStateToProps, {loginUser})(Auth)

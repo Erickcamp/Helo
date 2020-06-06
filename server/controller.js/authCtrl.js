@@ -27,8 +27,7 @@ module.exports = {
 
   register: async (req, res) => {
     const db = req.app.get("db");
-    const { username, password } = req.body;
-    const img = `https://robohash.org/${username}`;
+    const { username, password, profile_pic } = req.body;
     const outcome = await db.get_user(username);
     if (outcome[0]) {
       return res.status(409).send("User already exists");
@@ -36,9 +35,13 @@ module.exports = {
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
-    const user = await db.register_user([username, hash, img]);
+    const user = await db.register_user([username, hash, profile_pic]);
     delete user[0].hash;
-    req.session.user = user[0];
+    req.session.user = {
+      userId: user[0].user_id,
+      username: user[0].username,
+      img: user[0].profile_pic
+    }
     res.status(200).send(req.session.user);
   },
 
