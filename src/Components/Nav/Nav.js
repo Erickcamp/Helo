@@ -15,4 +15,7 @@ const Nav = (props) => {
     </nav>
   );
 };
-export default withRouter(Nav);
+
+const mapStateToProps = reduxState => reduxState
+
+export default connect(mapStateToProps)(withRouter(Nav));
