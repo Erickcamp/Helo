@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import axios from 'axios'
+import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
@@ -10,15 +13,17 @@ export default class Dashboard extends Component {
     };
   }
 
-  componentDidMount(){
-      // STEP 3
-      //get the latest posts
-      //those posts will update this.state.posts
+  componentDidMount() {
+    this.getPosts()
+  }
+
+  getPosts = () => {
+
   }
 
   changeHandler = (e) => {
     this.setState({
-      [e.name.target]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -37,7 +42,7 @@ export default class Dashboard extends Component {
 
   render() {
     const { posts, search, userposts } = this.state;
-    console.log("this.state", this.state);
+    console.log("this.props", this.props);
     return (
       <div>
         <div className="searchBox">
@@ -52,7 +57,7 @@ export default class Dashboard extends Component {
           <span>My Posts</span>
           <input
             type="checkbox"
-            onClick={this.checkboxHandler}
+            onChange={this.checkboxHandler}
             checked={userposts}
           />
         </div>
@@ -60,15 +65,16 @@ export default class Dashboard extends Component {
           {
             //map over the posts and render some jsx
             //display title, authors name, and profile pic
-
             // posts.map()
-
             //step 4
             // Link on each post that will navigate you to the /post page
-            // you will also send the post id as a nav param 
+            // you will also send the post id as a nav param
           }
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = reduxState => reduxState
+export default connect(mapStateToProps)(Dashboard)
