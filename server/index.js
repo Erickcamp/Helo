@@ -22,6 +22,20 @@ app.post('/auth/register', authCtrl.register)
 app.post('/auth/logout', authCtrl.logout)
 app.post('/auth/login', authCtrl.login)
 
+// step 2
+// postcontroller endpoints
+// get posts depending on userposts value
+
+// Need to built out postauth
+
+// app.get('/api/posts/:post_id', postCtrl.getPost)
+// app.get('/api/posts', postCtrl.getPosts)
+// app.post('/api/posts', postCtrl.addPost)
+// app.put('/api/posts/:post_id', postCtrl.editPost)
+// app.delete('/api/posts/:post_id', postCtrl.deletePost)
+
+// step 4 
+// write an endpoint for retrieving a single post
 
 
 massive({

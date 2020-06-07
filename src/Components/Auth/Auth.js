@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser } from "../../ducks/reducer";
 
@@ -60,17 +59,17 @@ class Auth extends Component {
             type="text"
             name="username"
             value={username}
-            onChange={(e) => this.changeHandler(e)}
+            onChange={this.changeHandler}
           />
           <input
             placeholder="Password"
             type="password"
             name="password"
             value={password}
-            onChange={(e) => this.changeHandler(e)}
+            onChange={this.changeHandler}
           />
-          <button onClick={(e) => this.login(e)}>Login</button>
-          <button onClick={(e) => this.register(e)}>Register</button>
+          <button onClick={this.login}>Login</button>
+          <button onClick={this.register}>Register</button>
         </form>
       </div>
     );
