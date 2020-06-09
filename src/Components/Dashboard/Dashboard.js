@@ -29,7 +29,7 @@ class Dashboard extends Component {
   //   }
 
   getPosts = () => {
-    return axios
+     axios
       .get("/api/posts")
       .then((res) => {
         this.setState({
@@ -40,6 +40,7 @@ class Dashboard extends Component {
         console.log(err);
       });
   };
+    
 
   changeHandler = (e) => {
     this.setState({
@@ -60,12 +61,14 @@ class Dashboard extends Component {
     }
   };
 
+  resetState = () => this.setState({posts: [], search: '', userposts: true, loading: true})
+
   render() {
     const { search, userposts } = this.state;
     console.log("this.props", this.props);
     let posts = this.state.posts.map((el) => {
       return (
-        <Link to={`/post/${el.post.id}`} key={el.post_id}>
+        <Link to={`api/posts/${el.post.id}`} key={el.post_id}>
           <div className="content_posts">
             <h3>{el.title}</h3>
             <div className="author_box">
@@ -85,7 +88,7 @@ class Dashboard extends Component {
             onChange={this.changeHandler}
           />
           <button>Search</button>
-          <button>Reset</button>
+          <button onClick={this.resetState}>Reset</button>
           <span>My Posts</span>
           <input
             type="checkbox"
@@ -110,3 +113,5 @@ class Dashboard extends Component {
 
 const mapStateToProps = (reduxState) => reduxState;
 export default connect(mapStateToProps)(Dashboard);
+
+

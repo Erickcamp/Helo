@@ -23,7 +23,7 @@ module.exports = {
     addPost: (req, res) => {
         const db = req.app.get('db')
         const {title, img, content, author_id} = req.body
-        db.add_post(title, img, content, author_id)
+        db.add_post([title, img, content, author_id])
         .then((res) => {
             res.status(200).send(res)
         })
@@ -35,7 +35,7 @@ module.exports = {
         const db = req.app.get('db')
         const {post_id} =req.params
         const {title, img, content, author_id} = req.body
-        db.edit_post(post_id, title, img, content, author_id)
+        db.edit_post([post_id, title, img, content, author_id])
         .then((res) => {
             res.status(200).send(res)
         })
