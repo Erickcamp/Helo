@@ -2,19 +2,20 @@ module.exports = {
     getPosts: (req, res) => {
         const db = req.app.get('db')
         db.get_posts()
-        .then((res) => {
-            res.status(200).send(res)
+        .then((response) => {
+            res.status(200).send(response)
         })
         .catch((err) => {
+            console.log('this is the err', err)
             res.status(500).send(err)
         })
     },
     getPost: (req, res) => {
         const db = req.app.get('db')
-        const {post_id} = req.params
-        db.get_post(post_id)
-        .then((res) => {
-            res.status(200).send(res)
+        const {id} = req.params
+        db.get_post(id)
+        .then((response) => {
+            res.status(200).send(response)
         })
         .catch((err) => {
             res.status(500).send(err)
@@ -23,9 +24,9 @@ module.exports = {
     addPost: (req, res) => {
         const db = req.app.get('db')
         const {title, img, content, author_id} = req.body
-        db.add_post([title, img, content, author_id])
-        .then((res) => {
-            res.status(200).send(res)
+        db.add_post(title, img, content, author_id)
+        .then((response) => {
+            res.status(200).send(response)
         })
         .catch((err) => {
             res.status(500).send(err)
@@ -33,11 +34,11 @@ module.exports = {
     },
     editPost: (req, res) => {
         const db = req.app.get('db')
-        const {post_id} =req.params
+        const {id} =req.params
         const {title, img, content, author_id} = req.body
-        db.edit_post([post_id, title, img, content, author_id])
-        .then((res) => {
-            res.status(200).send(res)
+        db.edit_post(id, title, img, content, author_id)
+        .then((response) => {
+            res.status(200).send(response)
         })
         .catch((err) => {
             res.status(500).send(err)
@@ -45,10 +46,10 @@ module.exports = {
     },
     deletePost: (req, res) => {
          const db = req.app.get('db')
-         const {post_id} = req.params
-         db.delete_post(post_id)
-         .then((res) => {
-             res.status(200).send(res)
+         const {id} = req.params
+         db.delete_post(id)
+         .then((response) => {
+             res.status(200).send(response)
          })
          .catch((err) => {
              res.stauts(500).send(err)

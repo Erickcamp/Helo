@@ -22,11 +22,11 @@ app.post('/auth/register', authCtrl.register)
 app.post('/auth/logout', authCtrl.logout)
 app.post('/auth/login', authCtrl.login)
 
-app.get('/api/posts/:post_id', postCtrl.getPost)
+app.get('/api/posts/:id', postCtrl.getPost)
 app.get('/api/posts', postCtrl.getPosts)
-app.post('/api/posts', postCtrl.addPost)
-app.put('/api/posts/:post_id', postCtrl.editPost)
-app.delete('/api/posts/:post_id', postCtrl.deletePost)
+app.post('/api/posts/:id', postCtrl.addPost)
+app.put('/api/posts/:id', postCtrl.editPost)
+app.delete('/api/posts/:id', postCtrl.deletePost)
 
 massive({
     connectionString: CONNECTION_STRING,

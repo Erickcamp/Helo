@@ -1,4 +1,4 @@
 UPDATE posts 
-SET title = $2, image = $3, content= $4 
-WHERE post_id = $1
+SET title = $2, img = $3, content= $4, author_id = $5
+WHERE id = $1
 returning *;
