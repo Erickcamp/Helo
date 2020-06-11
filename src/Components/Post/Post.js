@@ -2,35 +2,34 @@ import React, {Component} from 'react'
 import axios from 'axios'
 
 export default class Post extends Component {
-    constructor(){
-        super()
-        this.class = {
-            title: '',
-            img: '',
-            content: '',
-            author: '',
-            authorPicture: '',
-            loading: true
+    constructor(props){
+        super(props)
+        this.state = {
+            // title: '',
+            // img: '',
+            // content: '',
+            // author: '',
+            // authorPicture: '',
+            loading: true,
+            post: {}
         }
     }
 
-    componentDidMount(){
-        axios
-        .get(`/api/post/${this.props.match.params.id}`)
-        .then(res=> {
-            this.setState({
-                title: res.data,
-                img: res.data,
-                content: res.data,
-                author: res.data,
-                authorPicture: res.data,
-                loading:false
-            })
+    componentDidMount() {
+      axios
+      .get(`/api/post/${this.props.match.params.id}`)
+      .then((res) => {
+        this.setState({
+          post: res.data,
+          loading: false
         })
+      })
+      .catch((err) => console.log(err))
     }
 
     render(){
-        const {title, img, content, author, authorPicture, loading} = this.state
+        const {title, img, content, username, profile_pic, loading} = this.state.post
+
         return (
             <div className='Post content_box'>
               {!loading && title
@@ -39,8 +38,8 @@ export default class Post extends Component {
                   <div className='post_header'>
                     <h2 className='title'>{title}</h2>
                     <div className='author_box'>
-                      <p>by {author}</p>
-                      <img src={authorPicture} alt='author' />
+                      <p>by {username}</p>
+                      <img src={profile_pic} alt='author' />
                     </div>
                   </div>
                   <div className='post_content_box'>
@@ -48,13 +47,6 @@ export default class Post extends Component {
                     <p>{content}</p>
                   </div>
                 </div>
-                :
-                !loading
-                  ?
-                  <div className='oops_box'>
-                    <h2 className='title'>Oops!</h2>
-                    <p>Looks like this post doesn't exist anymore</p>
-                  </div>
                   :
                   <div className='load_box'>
                     <div className='load_background'></div>

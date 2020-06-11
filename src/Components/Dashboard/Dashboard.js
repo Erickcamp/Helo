@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import './Dashboard.css'
 class Dashboard extends Component {
   constructor() {
     super();
@@ -11,6 +12,7 @@ class Dashboard extends Component {
       search: "",
       userposts: true,
       loading: true,
+      filter: ''
     };
   }
 
@@ -18,33 +20,23 @@ class Dashboard extends Component {
     this.getPosts();
   }
 
-  // let { search, userposts } = this.state;
-  //   let url = `/api/posts/${this.props.userId}`;
-  //   if (userposts && !search) {
-  //     url += '?mine=true';
-  //   } else if (!myPosts && search) {
-  //     url += `?search=${search}`;
-  //   } else if (myPosts && search) {
-  //     url += `?mine=true&search=${search}`;
-  //   }
 
   getPosts = () => {
-     axios
-      .get("/api/posts")
-      .then((res) => {
-        this.setState({
-          posts: res.data,
-        });
+    axios
+    .get("/api/posts")
+    .then((res) => {
+      this.setState({
+        posts: res.data,
+        loading: false
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    })
+    .catch((err) => console.log(err))
+  }
     
 
   changeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -61,21 +53,35 @@ class Dashboard extends Component {
     }
   };
 
-  resetState = () => this.setState({posts: [], search: '', userposts: true, loading: true})
+  searchPosts = () => {
+    const {filter} = this.state
+    axios.get(`/api/posts/?filter=${filter}`)
+    .then((res) => {
+      console.log('this is filter', filter)
+      this.setState({
+        posts: res.data
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  resetState = () => this.setState({search: ''})
 
   render() {
-    const { search, userposts } = this.state;
+    const { search, userposts, filter } = this.state;
     console.log("this.props", this.props);
     let posts = this.state.posts.map((el) => {
       return (
-        <Link to={`api/posts/${el.post.id}`} key={el.post_id}>
+        <div key={el.id} onClick={() => this.props.history.push(`/posts/${el.id}`)} >
           <div className="content_posts">
             <h3>{el.title}</h3>
             <div className="author_box">
-              <p>Posted by: ${el.author_username}</p>
+              <p>Posted by: {el.username}</p>
             </div>
           </div>
-        </Link>
+        </div>
       );
     });
     return (
@@ -86,8 +92,10 @@ class Dashboard extends Component {
             name="search"
             value={search}
             onChange={this.changeHandler}
+            name='filter' 
+            value={filter}
           />
-          <button>Search</button>
+          <button onClick={this.searchPosts}>Search</button>
           <button onClick={this.resetState}>Reset</button>
           <span>My Posts</span>
           <input
@@ -97,6 +105,7 @@ class Dashboard extends Component {
           />
         </div>
         <div className="posts">
+          {console.log(posts)}
           {!this.state.loading ? (
             posts
           ) : (

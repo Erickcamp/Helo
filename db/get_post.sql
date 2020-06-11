@@ -1,3 +1,4 @@
-  
-SELECT * FROM posts
-WHERE id = $1;
+SELECT p.title, p.content, p.img, u.username, p.id 
+FROM posts p
+JOIN users u on p.author_id = u.id
+where p.id = $1;
