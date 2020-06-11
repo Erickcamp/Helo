@@ -8,8 +8,8 @@ export default class Post extends Component {
             // title: '',
             // img: '',
             // content: '',
-            // author: '',
-            // authorPicture: '',
+            // username: '',
+            // profile_pic: '',
             loading: true,
             post: {}
         }
@@ -17,11 +17,16 @@ export default class Post extends Component {
 
     componentDidMount() {
       axios
-      .get(`/api/post/${this.props.match.params.id}`)
+      .get(`/api/posts/${this.props.match.params.id}`)
       .then((res) => {
         this.setState({
-          post: res.data,
-          loading: false
+            // title: res.data,
+            // img: res.data,
+            // content: res.data,
+            // username: res.data,
+            // profile_pic: res.data,
+            loading: false,
+            post: res.data
         })
       })
       .catch((err) => console.log(err))
@@ -32,14 +37,14 @@ export default class Post extends Component {
 
         return (
             <div className='Post content_box'>
-              {!loading && title
+              {!loading
                 ?
                 <div>
                   <div className='post_header'>
                     <h2 className='title'>{title}</h2>
                     <div className='author_box'>
                       <p>by {username}</p>
-                      <img src={profile_pic} alt='author' />
+                      <img src={profile_pic} alt='user' />
                     </div>
                   </div>
                   <div className='post_content_box'>

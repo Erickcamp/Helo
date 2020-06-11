@@ -27,7 +27,7 @@ module.exports = {
     const { id } = req.params;
     db.get_post(id)
       .then((response) => {
-        res.status(200).send(response);
+        res.status(200).send(response[0]);
       })
       .catch((err) => {
         res.status(500).send(err);

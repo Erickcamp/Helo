@@ -55,9 +55,9 @@ class Dashboard extends Component {
 
   searchPosts = () => {
     const {filter} = this.state
+    console.log('this is filter', filter)
     axios.get(`/api/posts/?filter=${filter}`)
     .then((res) => {
-      console.log('this is filter', filter)
       this.setState({
         posts: res.data
       })
@@ -67,7 +67,14 @@ class Dashboard extends Component {
     })
   }
 
-  resetState = () => this.setState({search: ''})
+  resetState = () => {
+    axios.get('/api/posts').then((res) => {
+      this.setState({filter: '', posts: res.data})
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
   render() {
     const { search, userposts, filter } = this.state;
@@ -89,8 +96,6 @@ class Dashboard extends Component {
         <div className="searchBox">
           <input
             placeholder="Search by Title"
-            name="search"
-            value={search}
             onChange={this.changeHandler}
             name='filter' 
             value={filter}
