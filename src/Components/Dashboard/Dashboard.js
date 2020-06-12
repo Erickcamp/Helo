@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import './Dashboard.css'
+import "./Dashboard.css";
 class Dashboard extends Component {
   constructor() {
     super();
@@ -12,7 +12,7 @@ class Dashboard extends Component {
       search: "",
       userposts: true,
       loading: true,
-      filter: ''
+      filter: "",
     };
   }
 
@@ -20,23 +20,21 @@ class Dashboard extends Component {
     this.getPosts();
   }
 
-
   getPosts = () => {
     axios
-    .get("/api/posts")
-    .then((res) => {
-      this.setState({
-        posts: res.data,
-        loading: false
+      .get("/api/posts")
+      .then((res) => {
+        this.setState({
+          posts: res.data,
+          loading: false,
+        });
       })
-    })
-    .catch((err) => console.log(err))
-  }
-    
+      .catch((err) => console.log(err));
+  };
 
   changeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -54,34 +52,40 @@ class Dashboard extends Component {
   };
 
   searchPosts = () => {
-    const {filter} = this.state
-    console.log('this is filter', filter)
-    axios.get(`/api/posts/?filter=${filter}`)
-    .then((res) => {
-      this.setState({
-        posts: res.data
+    const { filter } = this.state;
+    console.log("this is filter", filter);
+    axios
+      .get(`/api/posts/?filter=${filter}`)
+      .then((res) => {
+        this.setState({
+          posts: res.data,
+        });
       })
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   resetState = () => {
-    axios.get('/api/posts').then((res) => {
-      this.setState({filter: '', posts: res.data})
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
+    axios
+      .get("/api/posts")
+      .then((res) => {
+        this.setState({ filter: "", posts: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   render() {
     const { search, userposts, filter } = this.state;
     console.log("this.props", this.props);
     let posts = this.state.posts.map((el) => {
       return (
-        <div key={el.id} onClick={() => this.props.history.push(`/posts/${el.id}`)} >
+        <div
+          key={el.id}
+          onClick={() => this.props.history.push(`/posts/${el.id}`)}
+        >
           <div className="content_posts">
             <h3>{el.title}</h3>
             <div className="author_box">
@@ -97,7 +101,7 @@ class Dashboard extends Component {
           <input
             placeholder="Search by Title"
             onChange={this.changeHandler}
-            name='filter' 
+            name="filter"
             value={filter}
           />
           <button onClick={this.searchPosts}>Search</button>
@@ -127,5 +131,3 @@ class Dashboard extends Component {
 
 const mapStateToProps = (reduxState) => reduxState;
 export default connect(mapStateToProps)(Dashboard);
-
-

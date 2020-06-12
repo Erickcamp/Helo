@@ -41,6 +41,7 @@ module.exports = {
         res.status(200).send(response);
       })
       .catch((err) => {
+          console.log('im the stupid error', err)
         res.status(500).send(err);
       });
   },

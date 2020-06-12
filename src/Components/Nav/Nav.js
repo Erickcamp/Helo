@@ -1,10 +1,16 @@
-import React from "react";
+import React, {Component} from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import {getUser} from '../../ducks/reducer'
 
-const Nav = (props) => {
-  const { push } = props.history;
-  if (props.location.pathname === "/") {
+class Nav extends Component {
+
+  componentDidMount(){
+    this.props.getUser()
+  }
+  render(){
+  const { push } = this.props.history;
+  if (this.props.location.pathname === "/") {
     return null;
   }
   return (
@@ -14,8 +20,9 @@ const Nav = (props) => {
       <button onClick={() => push("/")}>Logout</button>
     </nav>
   );
-};
+}
+}
 
 const mapStateToProps = reduxState => reduxState
 
-export default connect(mapStateToProps)(withRouter(Nav));
+export default connect(mapStateToProps, {getUser})(withRouter(Nav));

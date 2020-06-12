@@ -16,7 +16,7 @@ module.exports = {
       } else {
         if(authenticated) {
           req.session.user = {
-            userId: user[0].user_id
+            userId: user[0].id
           }
           res.status(200).send(req.session)
         }
@@ -37,7 +37,7 @@ module.exports = {
     const registerUser = await db.register_user([username, hash, profile_pic]);
     delete registerUser[0].hash;
     req.session.user = {
-      userId: registerUser[0].user_id,
+      userId: registerUser[0].id,
       username: registerUser[0].username,
       profileImg: registerUser[0].profile_pic
     }
