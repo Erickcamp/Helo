@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./Dashboard.css";
@@ -78,7 +77,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { search, userposts, filter } = this.state;
+    const { userposts, filter } = this.state;
     console.log("this.props", this.props);
     let posts = this.state.posts.map((el) => {
       return (

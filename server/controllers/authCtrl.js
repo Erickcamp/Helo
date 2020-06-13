@@ -2,23 +2,22 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   login: async (req, res) => {
-      const db = req.app.get("db");
-      const { username, password } = req.body;
-      const user = await db.get_user(username);
+    const db = req.app.get("db");
+    const { username, password } = req.body;
+    const user = await db.get_user(username);
 
-      if (!user[0]) {
-        return res.status(404).send("User does not exist");
-      } else {
-
+    if (!user[0]) {
+      return res.status(404).send("User does not exist");
+    } else {
       const authenticated = bcrypt.compareSync(password, user[0].password);
       if (!authenticated) {
         return res.status(403).send("Incorrect email or password");
       } else {
-        if(authenticated) {
+        if (authenticated) {
           req.session.user = {
-            userId: user[0].id
-          }
-          res.status(200).send(req.session)
+            userId: user[0].id,
+          };
+          res.status(200).send(req.session);
         }
       }
     }
@@ -39,8 +38,8 @@ module.exports = {
     req.session.user = {
       userId: registerUser[0].id,
       username: registerUser[0].username,
-      profileImg: registerUser[0].profile_pic
-    }
+      profileImg: registerUser[0].profile_pic,
+    };
     res.status(200).send(req.session.user);
   },
 

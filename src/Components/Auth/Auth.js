@@ -29,25 +29,24 @@ class Auth extends Component {
       })
       .catch((err) => {
         alert("Could not log in");
-        console.log(err)
+        console.log(err);
       });
   };
 
   register = (e) => {
-      e.preventDefault()
-      const {username, password} = this.state
-      axios.post('/auth/register', {username, password})
-      .then(res => {
-          this.props.loginUser(res.data)
-          this.props.history.push('/dashboard')
+    e.preventDefault();
+    const { username, password } = this.state;
+    axios
+      .post("/auth/register", { username, password })
+      .then((res) => {
+        this.props.loginUser(res.data);
+        this.props.history.push("/dashboard");
       })
-      .catch(err => {
-          console.log(err)
-          alert(err)
-      })
-  }
-
-
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
+  };
 
   render() {
     const { username, password } = this.state;
@@ -76,5 +75,5 @@ class Auth extends Component {
   }
 }
 
-const mapStateToProps = reduxState => reduxState
-export default connect(mapStateToProps, {loginUser})(Auth)
+const mapStateToProps = (reduxState) => reduxState;
+export default connect(mapStateToProps, { loginUser })(Auth);

@@ -14,9 +14,12 @@ class Form extends Component {
 
   handleSubmit = () => {
     axios
-      .post('/api/posts', {...this.state, author_id: this.props.user.user.userId})
+      .post("/api/posts", {
+        ...this.state,
+        author_id: this.props.user.user.userId,
+      })
       .then((res) => {
-        this.props.history.push('/dashboard');
+        this.props.history.push("/dashboard");
       })
       .catch((err) => {
         console.log(err);
