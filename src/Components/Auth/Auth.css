@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+.auth-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-image: linear-gradient(90deg, #ff70A6 0%, #ff9770 50%, #ffd670 75%, #e9ff70 100%);
+}
+
+.form-container {
+    width: 35vw;
+    height: 50vh;
+    margin: 0 auto;
+    border-radius: 14px;
+    margin-top: 150px;
+    padding: 20px;
+    background-image: linear-gradient(90deg, #ff9770 0%, #ffd670 100%);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 5px 10px 35px  black;
+    
+}
+.form-container h1 {
+    font-size: 70px;
+}
+
+.auth-info {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    margin: 0 auto;
+}
+
+.auth.input-box {
+   margin: 0 auto;
+}
+
+.login-register-btn {
+    display: inline-block;
+    height: 50px;
+    width: 100px;
+    background-color: grey;
+    color: white; 
+    margin: 55px;  
+}

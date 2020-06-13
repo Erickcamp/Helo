@@ -85,9 +85,9 @@ class Dashboard extends Component {
           key={el.id}
           onClick={() => this.props.history.push(`/posts/${el.id}`)}
         >
-          <div className="content_posts">
+          <div className="content_posts dashboard_post_box">
             <h3>{el.title}</h3>
-            <div className="author_box">
+            <div className="username_box">
               <p>Posted by: {el.username}</p>
             </div>
           </div>

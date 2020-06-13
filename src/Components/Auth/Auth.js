@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { loginUser } from "../../ducks/reducer";
+import './Auth.css'
 
 class Auth extends Component {
   constructor() {
@@ -51,14 +52,18 @@ class Auth extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <div>
-        <form onSubmit={(e) => this.login(e)}>
+      <div className='auth-container'>
+        <form onSubmit={(e) => this.login(e)} className='form-container'>
+        <img src="https://cdn.glitch.com/875fcc3a-ee91-4d48-806c-d5b121d9c21c%2Fsmile%20face.png?v=1591393051733" alt="site logo"/>
+        <h1>Helo</h1>
+        <div className='auth-info'>
           <input
             placeholder="Username"
             type="text"
             name="username"
             value={username}
             onChange={this.changeHandler}
+            className='auth-input-box'
           />
           <input
             placeholder="Password"
@@ -66,9 +71,11 @@ class Auth extends Component {
             name="password"
             value={password}
             onChange={this.changeHandler}
+            className='auth-input-box'
           />
-          <button onClick={this.login}>Login</button>
-          <button onClick={this.register}>Register</button>
+          </div>
+          <button onClick={this.login} className='login-register-btn'>Login</button>
+          <button onClick={this.register} className='login-register-btn'>Register</button>
         </form>
       </div>
     );
